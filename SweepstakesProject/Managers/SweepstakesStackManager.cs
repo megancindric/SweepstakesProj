@@ -5,13 +5,16 @@ using System.Text;
 namespace SweepstakesProject
 {
     class SweepstakesStackManager : ISweepstakesManager
-
     {
-        //will use stack as underlying data structure
-        //member variables
+        Stack<Sweepstakes> stack = new Stack<Sweepstakes>();
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
+        {
+            stack.Push(sweepstakes);
+        }
+        public Sweepstakes GetSweepstakes()
+        {
+            return stack.Pop();
+        }
 
-        //ctor
-
-        //member methods
     }
 }

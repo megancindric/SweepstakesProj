@@ -6,11 +6,15 @@ namespace SweepstakesProject
 {
     class SweepstakesQueueManager : ISweepstakesManager
     {
-        //Will use queue as underlying structure
-        //member variables
+        Queue<Sweepstakes> queue = new Queue<Sweepstakes>();
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
+        {
+            queue.Enqueue(sweepstakes);
+        }
+        public Sweepstakes GetSweepstakes()
+        {
+            return queue.Dequeue();
+        }
 
-        //ctor
-
-        //member methods
     }
 }
