@@ -28,7 +28,8 @@ namespace SweepstakesProject
         }
         public void RegisterContestant(Contestant contestant)
         {
-            Add(contestant.RegistrationNumber, contestant);
+            contestant.RegistrationNumber = contestants.Count;
+            contestants.Add(contestant.RegistrationNumber, contestant);
             //Will either add to stack or queue here
         }
 
@@ -37,7 +38,7 @@ namespace SweepstakesProject
             Console.WriteLine($"First Name: {contestant.FirstName}");
             Console.WriteLine($"Last Name: {contestant.LastName}");
             Console.WriteLine($"Email: {contestant.EmailAddress}");
-            Console.WriteLine($"First Name: {contestant.RegistrationNumber}");
+            Console.WriteLine($"Registration Number: {contestant.RegistrationNumber}");
         }
         public Contestant PickWinner()
         {

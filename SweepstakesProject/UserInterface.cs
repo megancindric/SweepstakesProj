@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 
 namespace SweepstakesProject
@@ -22,6 +23,14 @@ namespace SweepstakesProject
             Console.Write("Email Address: ");
             contestantInfo += "," + Console.ReadLine();
             return contestantInfo;
+        }
+
+        public static string GetManagerInput()
+        {
+            string managerInput;
+            Console.WriteLine("Press 1 for Stack\nPress 2 for Queue");
+            managerInput = Console.ReadLine();
+            return managerInput;
         }
     }
 }
