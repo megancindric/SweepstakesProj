@@ -7,9 +7,13 @@ namespace SweepstakesProject
     class MarketingFirm
     {
         //member variables
-
+        private ISweepstakesManager manager;
         //ctor
 
         //member methods
+        public void CreateSweepstake()
+        {
+
+        }
     }
 }
