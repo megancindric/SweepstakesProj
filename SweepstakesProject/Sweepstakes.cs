@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using MailKit.Net.Smtp;
+using MailKit;
+using MimeKit;
 
 namespace SweepstakesProject
 {
@@ -42,26 +45,50 @@ namespace SweepstakesProject
             {
                if (contestant.Key == winnerkey)
                {
-                    NotifyWinner();
                     return contestant.Value;
                }
             }
             return null;
         }
-        public void NotifyContestants()
-        { 
-
-        }
-
-        public void NotifyWinner()
+        public void NotifyContestants(Contestant winnerContestant)
         {
-            Console.WriteLine("Congratulations!  You've won the sweepstakes!");
-        }
+            MailboxAddress duckAddress = new MailboxAddress("Brent & Megan", "bigduckenergy@duckduckgo.com");
+            foreach (KeyValuePair<int, Contestant> contestant in contestants)
+            {  
+                var message = new MimeMessage();
+                message.From.Add(duckAddress);
+                message.To.Add(new MailboxAddress(contestant.Value.FirstName, contestant.Value.EmailAddress));
+                if(contestant.Value == winnerContestant)
+                {
+                    message.Subject = $"Congratulations, you're the lucky winner!";
+                    message.Body = new TextPart("plain") { Text = @$"CONGRATS {contestant.Value.FirstName},
+                
+                Wow you won our sweepstakes and the grand prize of a millon dollars and a yacht!  Lucky you!  Just reply to this email and we'll send you your yacht via USPS in 3-5 business days!
 
-        public void NotifyLoser()
-        {
-            Console.WriteLine("Sorry - better luck next time!  Thanks for playing!");
+                    Thanks so much for playing!
+                        ~~BigDuckEnergy" };
+                }
+                else
+                {
+                    message.Subject = "Thanks for playing!";
+                    message.Body = new TextPart("plain") {Text = @$"Hey there {contestant.Value.FirstName},
+                
+                Thanks so much for playing our sweepstakes, but unfortunately you were not the winner.We hope you'll try again!
+
+                    Warm Regards,
+                        ~~BigDuckEnergy"};
+
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smpt.gmail.com", 465, true);
+                        client.Authenticate ("bigduckenergy", "themightyducks1");
+
+                        client.Send(message);
+                        client.Disconnect(true);
+                    }
+                }
+            }
         }
-        
     }
 }
