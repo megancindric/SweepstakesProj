@@ -7,30 +7,25 @@ namespace SweepstakesProject
 {
     class Sweepstakes
     {
-        //will utilize Dictionary data structure
         //member variables
         private Dictionary<int, Contestant> contestants;
         private string name;
-        public string Name { get; set; }
+        public string Name { get => name; set => name = value; }
         Random rand = new Random();
+        int winnerkey;
 
         //ctor
-        public Sweepstakes()
+        public Sweepstakes(String sweepstakesName)
         {
             contestants = new Dictionary<int, Contestant>();
+            Name = sweepstakesName;
         }
 
         //member methods
-
-        public Sweepstakes(String sweepstakesName)
-        {
-            //can use this to set sweepstakes name
-        }
         public void RegisterContestant(Contestant contestant)
         {
             contestant.RegistrationNumber = contestants.Count;
             contestants.Add(contestant.RegistrationNumber, contestant);
-            //Will either add to stack or queue here
         }
 
         public void PrintContestantInfo(Contestant contestant)
@@ -42,16 +37,31 @@ namespace SweepstakesProject
         }
         public Contestant PickWinner()
         {
-            int winnerkey = rand.Next(1, contestants.Count + 1);
+            winnerkey = rand.Next(1, contestants.Count + 1);
             foreach (KeyValuePair<int, Contestant> contestant in contestants)
             {
                if (contestant.Key == winnerkey)
-                {
+               {
+                    NotifyWinner();
                     return contestant.Value;
-                }
+               }
             }
             return null;
-           //Will pick and then return a contestant
         }
+        public void NotifyContestants()
+        { 
+
+        }
+
+        public void NotifyWinner()
+        {
+            Console.WriteLine("Congratulations!  You've won the sweepstakes!");
+        }
+
+        public void NotifyLoser()
+        {
+            Console.WriteLine("Sorry - better luck next time!  Thanks for playing!");
+        }
+        
     }
 }

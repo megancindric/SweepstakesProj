@@ -1,0 +1,6 @@
+Sweepstakes Project use of Dependency Injection
+
+We utilized dependency injection within our Marketing Firm class.
+This allows the user to select between a Queue or Stack Sweepstakes Manager, which will then
+be passed into the constructor for the Marketing Firm, ensuring the correct manager is 
+instantiated.
