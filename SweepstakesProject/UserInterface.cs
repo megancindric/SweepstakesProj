@@ -32,5 +32,13 @@ namespace SweepstakesProject
             managerInput = Console.ReadLine();
             return managerInput;
         }
+
+        public static string GetSweepstakesName()
+        {
+            string sweepstakesName;
+                Console.WriteLine("Please enter the name of your sweepstakes");
+            sweepstakesName = Console.ReadLine();
+            return sweepstakesName;
+        }
     }
 }
